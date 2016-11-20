@@ -3,6 +3,8 @@ class VotesController < ApplicationController
     authorize! :vote, _movie
 
     _voter.vote(_type)
+    #email the submiter
+    _notify(current_user,_movie,_type)
     redirect_to root_path, notice: 'Vote cast'
   end
 
@@ -17,6 +19,12 @@ class VotesController < ApplicationController
 
   def _voter
     VotingBooth.new(current_user, _movie)
+  end
+
+  def _notify(interactor,movie,interaction_type)
+    submiter_email = movie.user.email
+    #send the email only if we actually have an email to send to
+    InteractionMail.interaction_mail(submiter_email,interactor,movie,interaction_type).deliver if submiter_email
   end
 
   def _type
