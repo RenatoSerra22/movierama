@@ -13,4 +13,3 @@ class Movie < BaseModel
   set :likers, :User
   set :haters, :User
 end
-
