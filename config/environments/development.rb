@@ -16,7 +16,7 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  #Plain login details in a public config is a bad idea, but this is just a test mail
+  #Plain login details in a public config is a bad idea, but this is just a test mail, leaving it in case someone wants to try it
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,

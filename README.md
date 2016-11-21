@@ -65,7 +65,33 @@ Login/signup use Omniauth with Github as a provider. If you're using Pow and the
 If not, you'll need to get your own OAuth tokens from Github and edit
 `.env` appropriately.
 
+#### Email notifications
 
+When a user likes/hates a movie posted by a user with an email address, the poster is notified via email
+
+Gmails SMTP is used
+
+activate smtp in the desired environment config
+
+    $ config.action_mailer.delivery_method = :smtp
+
+and add your email details
+
+```ruby
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'UserName@gmail.com',
+    password:             'Password',
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+```
+
+For email notifications to work sidekiq needs to be runing to pull work from the queue
+
+    $ bundle exec sidekiq
 
 ### Screenshot
 

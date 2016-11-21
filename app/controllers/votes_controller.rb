@@ -23,8 +23,9 @@ class VotesController < ApplicationController
 
   def _notify(interactor,movie,interaction_type)
     submiter_email = movie.user.email
-    #send the email only if we actually have an email to send to
-    InteractionMail.interaction_mail(submiter_email,interactor,movie,interaction_type).deliver if submiter_email
+    #Send the email only if we actually have an email to send to
+    #Push it to a Redis queue and send it async, because the result is slow and irrelevant to the user
+    EmailWorker.perform_async(submiter_email, interactor.name, movie.title, interaction_type) if submiter_email
   end
 
   def _type

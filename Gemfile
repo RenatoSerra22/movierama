@@ -18,6 +18,9 @@ gem 'rails_12factor', group: :production
 # Forces SSL usage
 gem 'rack-ssl'
 
+#sidekiq to perform async tasks
+gem 'sidekiq'
+
 # Use Redis as backing store
 gem 'ohm'
 gem 'ohm-contrib'
